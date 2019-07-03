@@ -98,7 +98,8 @@ class HBNBCommand(cmd.Cmd):
         """updates instance based on class/id"""
         arguments = arg.split()
         float = ["latitude", "longitude"]
-        int = ["number_rooms", "number_bathrooms", "max_guest", "price_by_night"]
+        int = ["number_rooms", "number_bathrooms",
+               "max_guest", "price_by_night"]
         if len(arguments) == 0:
             print("** class name missing **")
         elif arguements[0] in classes:
@@ -118,7 +119,8 @@ class HBNBCommand(cmd.Cmd):
                                         arguments[3] = float(arguments[3])
                                     except:
                                         arguments[3] = 0.0
-                            setattr(models.storage.all()[keys], arguments[2], arguemnts[3])
+                            setattr(models.storage.all()[keys],
+                                    arguments[2], arguemnts[3])
                             models.storage.all()[keys].save()
                         else:
                             print("** value missing **")
