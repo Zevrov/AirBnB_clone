@@ -33,7 +33,7 @@ class FileStorage:
     def reload(self):
         """retreive objects from a JSON file"""
         try:
-            with open(self.__file_path, 'r') as file:
+            with open(self.__file_path, 'r', encoding="UTF-8") as file:
                 json_object = json.load(file)
             for keys in json_obj:
                 self.__objects[keys] = classes[json_object[key]["__class__"]](**json_obj[key])
@@ -42,8 +42,9 @@ class FileStorage:
 
     def save(self):
         """save to JSON storage file"""
-        json_obj = {}
-        for keys in self.__objects:
-            json_obj[keys] = self.__objects[keys].to_dict()
-        with open(self.__file_path, 'w') as file:
-            json.dump(json_obj, file)
+        new_dict = {}
+        for key in self.__objects.keys():
+            new_dict[key] = self.__objects[key].to_json()
+        with open(FileStorage.__file_path, mode="w",
+                  encoding="UTF-8") as to_file:
+            (json.dump(new_dict, to_file))
