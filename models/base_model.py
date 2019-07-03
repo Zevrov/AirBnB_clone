@@ -33,12 +33,13 @@ class BaseModel:
 
         def __str__(self):
                 """String rep of the BaseModel"""
-                return '[{:s}] ({:s}) {}'.format(self.__class__.__name__,
-                                                 self.id, self.__dict__)
+                return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
+                                                 self.__dict__)
 
         def save(self):
                 """updates the attr updated_at"""
                 self.updated_at = datetime.now()
+                models.storage.save()
 
         def to_dict(self):
                 """returns a dictionary with created_at and updated_at"""
