@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """prints all instances if they exist"""
-        instances = storage.all()
+        instances = models.storage.all()
         class_arg = "empty"
         if arg in self.classes:
             for keys, value in instances.items():
