@@ -12,13 +12,13 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
+classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
+           "Place": Place, "Review": Review, "State": State, "User": User}
+
 
 class HBNBCommand(cmd.Cmd):
     """HBNB console"""
-    classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-               "Place": Place, "Review": Review, "State": State, "User": User}
     prompt = '(hbnb) '
-    storage = models.storage
 
     def do_quit(self, arg):
         """command to exit the program"""
@@ -38,13 +38,13 @@ class HBNBCommand(cmd.Cmd):
         if len(arguments) == 0:
             print("** class name missing **")
             return False
+        if arguments[0] in classes:
+            object = classes[arguments[0]]()
         else:
-            if len(arguments) == 1 and arguments[0] in self.classes:
-                instace = self.classes.get(arguments[0])()
-                print(instance.id)
-            else:
-                print("** class doesn't exist **")
-        storage.save()
+            print("** class doesn't exist **")
+            return False
+        print(object.id)
+        object.save()
 
     def do_show(self, arg):
         """shows string rep of an instance
@@ -86,20 +86,23 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """prints all instances if they exist"""
-        instances = models.storage.all()
-        class_arg = "empty"
-        if arg in self.classes:
-            for keys, value in instances.items():
-                if arg in key:
-                    print(value)
-                    class_arg = "instances exist"
-                if class_arg == "empty":
-                    print("[]")
-            else:
-                print("** class doesn't exist **")
+        arguments = arg.split()
+        instance_list = []
+        if len(arguments) == 0:
+            for v in models.storage.all().values():
+                instance_list.append(str(v))
+            print("[", end="")
+            print(", ".join(instance_list), end="")
+            print("]")
+        elif arguments[0] in classes:
+            for keys in models.storage.all():
+                if arguments[0] in keys:
+                    instance_list.append(str(models.storage.all()[keys]))
+            print("[", end="")
+            print(", ".join(instance_list), end="")
+            print("]")
         else:
-            for value in instances.values():
-                print(value)
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         """updates instance based on class/id"""
