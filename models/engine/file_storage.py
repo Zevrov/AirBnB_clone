@@ -30,13 +30,18 @@ class FileStorage:
             k = obj.__class__.__name__ + "." + obj.id
             self.__objects[k] = obj
 
-    def reload(self):
-        """retreive objects from a JSON file"""
+def reload(self):
+        """deserializes the JSON file to __objects
+        (only if the JSON file exists ; otherwise, do nothing)
+        """
         try:
-            with open(self.__file_path, 'r', encoding="UTF-8") as file:
-                j_ob = json.load(file)
-            for k in json_ob:
-                self.__objects[k] = classes[j_ob[k]["__class__"]](**j_ob[k])
+            with open(FileStorage.__file_path, mode="r",
+                      encoding="UTF-8") as to_file:
+                for key, value in obj_load.items():
+                    if value.get("__class__") in class_list:
+                        method = value.get("__class__")
+                        self.__objects[key] = eval(
+                            str(method))(obj_load[key])
         except:
             pass
 
