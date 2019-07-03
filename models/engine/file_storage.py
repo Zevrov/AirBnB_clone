@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """module for FileSorage class"""
 
-import os.path
 import json
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -18,36 +17,33 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 class FileStorage:
     """class to store and return obejects using JSON"""
 
-    __file_path = "storage.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
         """return the __objects dictionary"""
-        return type(self).__objects
+        return self.__objects
 
     def new(self, obj):
         """creates dictionary of object to __objects"""
         if obj is not None:
             k = obj.__class__.__name__ + "." +obj.id
-            self.obj[k] = obj
-
-    def reload(self):
-        """retreive objects from a JSON file"""
-        try:
-            with open(self.__file_path, "r") as file:
-                json_object = json.load(f)
-            for keys in json_obj:
-                self.__objects[keys] = classes[json_object[key]["__class__"]](**json_obj[key])
-        """"if not os.path.isfile(FileStorage.__file_path):
-            return
-        with open(FileStorage.__file_path, 'rt') as file:
-            FileStorage.__objects = json.load(file)
-        """
+            self.__objects[k] = obj
 
     def save(self):
         """save to JSON storage file"""
         json_obj = {}
         for keys in self.__objects:
-            json_obj[keys] = self.__objects[key].to_dict[]
-        with open(self.__file_path, 'wt') as file:
+            json_obj[keys] = self.__objects[keys].to_dict()
+        with open(self.__file_path, 'w') as file:
             json.dump(json_obj, file)
+
+    def reload(self):
+        """retreive objects from a JSON file"""
+        try:
+            with open(self.__file_path, 'r') as file:
+                json_object = json.load(file)
+            for keys in json_obj:
+                self.__objects[keys] = classes[json_object[key]["__class__"]](**json_obj[key])
+        except:
+            pass
