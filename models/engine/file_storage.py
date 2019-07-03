@@ -27,7 +27,7 @@ class FileStorage:
     def new(self, obj):
         """creates dictionary of object to __objects"""
         if obj is not None:
-            k = obj.__class__.__name__ + "." +obj.id
+            k = obj.__class__.__name__ + "." + obj.id
             self.__objects[k] = obj
 
     def reload(self):
@@ -36,7 +36,8 @@ class FileStorage:
             with open(self.__file_path, 'r') as file:
                 json_object = json.load(file)
             for keys in json_obj:
-                self.__objects[keys] = classes[json_object[key]["__class__"]](**json_obj[key])
+                self.__objects[keys] = classes[json_object[key]["__class__"]]
+                (**json_obj[key])
         except:
             pass
 

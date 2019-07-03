@@ -33,8 +33,8 @@ class BaseModel:
 
         def __str__(self):
                 """String rep of the BaseModel"""
-                return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
-                                                 self.__dict__)
+                return "[{:s}] ({:s}) {}".format(self.__class__.__name__,
+                                                 self.id, self.__dict__)
 
         def save(self):
                 """updates the attr updated_at"""
