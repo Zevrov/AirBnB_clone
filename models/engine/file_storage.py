@@ -30,14 +30,6 @@ class FileStorage:
             k = obj.__class__.__name__ + "." +obj.id
             self.__objects[k] = obj
 
-    def save(self):
-        """save to JSON storage file"""
-        json_obj = {}
-        for keys in self.__objects:
-            json_obj[keys] = self.__objects[keys].to_dict()
-        with open(self.__file_path, 'w') as file:
-            json.dump(json_obj, file)
-
     def reload(self):
         """retreive objects from a JSON file"""
         try:
@@ -47,3 +39,11 @@ class FileStorage:
                 self.__objects[keys] = classes[json_object[key]["__class__"]](**json_obj[key])
         except:
             pass
+
+    def save(self):
+        """save to JSON storage file"""
+        json_obj = {}
+        for keys in self.__objects:
+            json_obj[keys] = self.__objects[keys].to_dict()
+        with open(self.__file_path, 'w') as file:
+            json.dump(json_obj, file)
