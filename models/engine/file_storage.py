@@ -21,11 +21,11 @@ class FileStorage:
     __objects = {}
 
     def all(self):
-        """return the __objects dictionary"""
+        """return the objects dictionary"""
         return self.__objects
 
     def new(self, obj):
-        """creates dictionary of object to __objects"""
+        """creates dictionary of object"""
         if obj is not None:
             k = '{}.{}'.format(obj.__class__.name, obj.id)
             value = obj.to_dict()
@@ -33,8 +33,7 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects
-        (only if the JSON file exists ; otherwise, do nothing)
-        """
+        if the file exists, do nothing otherwise"""
         try:
             with open(FileStorage.__file_path, mode="r",
                       encoding="UTF-8") as to_file:
