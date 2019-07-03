@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""module for FileSorage class"""
+"""module for FileStorage class"""
 
 import json
 from models.amenity import Amenity
@@ -43,8 +43,8 @@ class FileStorage:
     def save(self):
         """save to JSON storage file"""
         new_dict = {}
-        for key in self.__objects.keys():
-            new_dict[key] = self.__objects[key].to_json()
+        for key in FileStorage.__objects.keys():
+            new_dict[key] = FileStorage.__objects[key].to_dict()
         with open(FileStorage.__file_path, mode="w",
                   encoding="UTF-8") as to_file:
             (json.dump(new_dict, to_file))
