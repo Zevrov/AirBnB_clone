@@ -7,6 +7,6 @@ class Amenity(BaseModel):
     """rep of amenity"""
     name = ""
 
-    def __init__(self, args, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """init amenity"""
         super().__init__(*args, **kwargs)

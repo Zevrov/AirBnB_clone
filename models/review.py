@@ -9,6 +9,6 @@ class Review(BaseModel):
     user_id = ""
     text = ""
 
-    def __init__(self, args, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """init review"""
         super().__init__(*args, **kwargs)
