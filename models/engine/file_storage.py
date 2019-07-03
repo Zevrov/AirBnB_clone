@@ -34,10 +34,9 @@ class FileStorage:
         """retreive objects from a JSON file"""
         try:
             with open(self.__file_path, 'r', encoding="UTF-8") as file:
-                json_object = json.load(file)
-            for keys in json_obj:
-                self.__objects[keys] = classes[json_object[key]["__class__"]]
-                (**json_obj[key])
+                j_ob = json.load(file)
+            for k in json_ob:
+                self.__objects[k] = classes[j_ob[k]["__class__"]](**j_ob[k])
         except:
             pass
 
