@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""module for FileSorage class"""
+"""module for FileStorage class"""
 
 import json
 from models.amenity import Amenity
@@ -32,20 +32,36 @@ class FileStorage:
             type(self).__objects[key] = value
 
     def reload(self):
-        """retreive objects from a JSON file"""
+        """deserializes the JSON file to __objects
+        (only if the JSON file exists ; otherwise, do nothing)
+        """
         try:
-            with open(self.__file_path, 'r') as file:
-                json_object = json.load(file)
-            for keys in json_obj:
-                self.__objects[keys] = classes[json_object[key]["__class__"]]
-                (**json_obj[key])
+            with open(FileStorage.__file_path, mode="r",
+                      encoding="UTF-8") as to_file:
+                obj_load = json.load(to_file)
+                from models.base_model import BaseModel
+                from models.amenity import Amenity
+                from models.city import City
+                from models.place import Place
+                from models.review import Review
+                from models.state import State
+                from models.user import User
+
+                class_list = ["BaseModel", "Amenity", "City", "Place",
+                              "Review", "State", "User"]
+                for key, value in obj_load.items():
+                    if value.get("__class__") in class_list:
+                        method = value.get("__class__")
+                        self.__objects[key] = eval(
+                            str(method))(obj_load[key])
         except:
             pass
 
     def save(self):
         """save to JSON storage file"""
-        json_obj = {}
-        for keys in self.__objects:
-            json_obj[keys] = self.__objects[keys].to_dict()
-        with open(self.__file_path, 'w') as file:
-            json.dump(json_obj, file)
+        new_dict = {}
+        for key in FileStorage.__objects.keys():
+            new_dict[key] = FileStorage.__objects[key].to_dict()
+        with open(FileStorage.__file_path, mode="w",
+                  encoding="UTF-8") as to_file:
+            json.dump(new_dict, to_file)
