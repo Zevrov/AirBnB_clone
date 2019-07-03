@@ -30,13 +30,24 @@ class FileStorage:
             k = obj.__class__.__name__ + "." + obj.id
             self.__objects[k] = obj
 
-def reload(self):
+    def reload(self):
         """deserializes the JSON file to __objects
         (only if the JSON file exists ; otherwise, do nothing)
         """
         try:
             with open(FileStorage.__file_path, mode="r",
                       encoding="UTF-8") as to_file:
+                obj_load = json.load(to_file)
+                from models.base_model import BaseModel
+                from models.amenity import Amenity
+                from models.city import City
+                from models.place import Place
+                from models.review import Review
+                from models.state import State
+                from models.user import User
+
+                class_list = ["BaseModel", "Amenity", "City", "Place",
+                              "Review", "State", "User"]
                 for key, value in obj_load.items():
                     if value.get("__class__") in class_list:
                         method = value.get("__class__")
