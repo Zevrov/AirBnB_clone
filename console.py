@@ -13,6 +13,7 @@ from models.user import User
 from datetime import datetime
 from ast import literal_eval
 import functools
+from shlex import split
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -144,24 +145,5 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
         else:
             print("** class doesn't exist **")
-
-    def do_count(self, arg):
-        """Counts the number of instances of a given class"""
-        arguments = arg.split()
-        count = 0
-        if len(arguments) == 0:
-            print("** class name missing **")
-            return
-        obj_class = arguments[0]
-        if obj_class not in classes:
-            print("** class doesn't exist **")
-            return
-        elif arguments[0] in classes:
-            if len(arguments) > 1:
-                keys = arguments[0] + "." + arguments[1]
-                for key, object in models.storage.all().items():
-                    if key.partition('.')[0] == obj_class:
-                        count += 1
-        print(count)
 if __name__ == '__main__':
         HBNBCommand().cmdloop()
