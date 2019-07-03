@@ -27,8 +27,9 @@ class FileStorage:
     def new(self, obj):
         """creates dictionary of object to __objects"""
         if obj is not None:
-            k = obj.__class__.__name__ + "." + obj.id
-            self.__objects[k] = obj
+            k = '{}.{}'.format(obj.__class__.name, obj.id)
+            value = obj.to_dict()
+            type(self).__objects[key] = value
 
     def reload(self):
         """retreive objects from a JSON file"""
