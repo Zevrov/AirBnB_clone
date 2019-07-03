@@ -4,9 +4,9 @@ from models.base_model import BaseModel
 
 
 class State(BaseModel):
-	"""rep of state"""
-	name = ""
+    """rep of state"""
+    name = ""
 
-	def __init__(self, args, *args, **kwargs):
-		"""init state"""
-		super().__init__(*args, **kwargs)
+    def __init__(self, args, *args, **kwargs):
+        """init state"""
+        super().__init__(*args, **kwargs)

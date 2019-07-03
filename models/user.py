@@ -4,12 +4,12 @@ from models.base_model import BaseModel
 
 
 class User(BaseModel):
-	"""rep of user"""
-	email = ""
-	password = ""
-	first_name = ""
-	last_name = ""
+    """rep of user"""
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
 
-	def __init__(self, args, *args, **kwargs):
-		"""init user"""
-		super().__init__(*args, **kwargs)
+    def __init__(self, args, *args, **kwargs):
+        """init user"""
+        super().__init__(*args, **kwargs)
