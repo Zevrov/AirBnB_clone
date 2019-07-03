@@ -9,6 +9,7 @@ from datetime import datetime
 
 class BaseModel:
         """BaseModel for other classes"""
+
         def __init__(self, *args, **kwargs):
                 """public instance attr"""
                 time = '%Y-%m-%dT%H:%M:%S.%f'
