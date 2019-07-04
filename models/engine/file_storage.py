@@ -27,8 +27,9 @@ class FileStorage:
     def new(self, obj):
         """creates dictionary of object"""
         if obj is not None:
-            key = '{}.{}'.format(type(obj).__name__, obj.id)
-            self.__objects[key] = obj
+            k = '{}.{}'.format(obj.__class__.name, obj.id)
+            value = obj.to_dict()
+            type(self).__objects[key] = value
 
     def reload(self):
         """deserializes the JSON file to __objects
@@ -59,12 +60,17 @@ class FileStorage:
         """save to JSON storage file"""
         new_dict = {}
 <<<<<<< HEAD
+<<<<<<< HEAD
         for key in FileStorage.__objects.keys():
             new_dict[key] = FileStorage.__objects[key].to_dict()
         with open(FileStorage.__file_path, mode="w+",
 =======
         for key, value in self.__objects.items():
             new_dict[key] = value.to_dict()
+=======
+        for key in FileStorage.__objects.keys():
+            new_dict[key] = FileStorage.__objects[key].to_dict()
+>>>>>>> parent of 35e1b85... got it working again, not sure why it stopped
         with open(FileStorage.__file_path, mode="w",
 >>>>>>> 35e1b85bf44113dc044770b47cb3597f478d4264
                   encoding="UTF-8") as to_file:
