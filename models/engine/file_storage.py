@@ -62,12 +62,17 @@ class FileStorage:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         for key in FileStorage.__objects.keys():
             new_dict[key] = FileStorage.__objects[key].to_dict()
         with open(FileStorage.__file_path, mode="w+",
 =======
         for key, value in self.__objects.items():
             new_dict[key] = value.to_dict()
+=======
+        for key in FileStorage.__objects.keys():
+            new_dict[key] = FileStorage.__objects[key].to_dict()
+>>>>>>> parent of 35e1b85... got it working again, not sure why it stopped
 =======
         for key in FileStorage.__objects.keys():
             new_dict[key] = FileStorage.__objects[key].to_dict()
