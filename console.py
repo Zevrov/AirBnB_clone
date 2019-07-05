@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
                "max_guest", "price_by_night"]
         if len(arguments) == 0:
             print("** class name missing **")
-        elif arguements[0] in classes:
+        elif arguments[0] in classes:
             if len(arguments) > 1:
                 keys = arguments[0] + "." + arguments[1]
                 if keys in models.storage.all():
@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
                                     except:
                                         arguments[3] = 0.0
                             setattr(models.storage.all()[keys],
-                                    arguments[2], arguemnts[3])
+                                    arguments[2], arguments[3])
                             models.storage.all()[keys].save()
                         else:
                             print("** value missing **")
