@@ -58,14 +58,8 @@ class FileStorage:
     def save(self):
         """save to JSON storage file"""
         new_dict = {}
-<<<<<<< HEAD
-        for key in FileStorage.__objects.keys():
-            new_dict[key] = FileStorage.__objects[key].to_dict()
-        with open(FileStorage.__file_path, mode="w+",
-=======
         for key, value in self.__objects.items():
             new_dict[key] = value.to_dict()
         with open(FileStorage.__file_path, mode="w",
->>>>>>> 35e1b85bf44113dc044770b47cb3597f478d4264
                   encoding="UTF-8") as to_file:
             json.dump(new_dict, to_file)
