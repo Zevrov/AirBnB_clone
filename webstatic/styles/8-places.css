@@ -28,3 +28,13 @@
 	font-size: 30px;
 	text-align: center;
 }
+
+.max_guest {
+	background-image: url('../images/icon_group.png');
+}
+
+.number_rooms { background-image: url('../images/icon_bed.png');
+}
+
+.number_bathrooms { background-image: url('../images/icon_bath.png');
+}
