@@ -1,3 +1,8 @@
+html {
+	min-height: 100%;
+	position: relative;
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -8,5 +13,6 @@ body {
 
 body .container {
 	max-width: 1000px;
-	margin: 30px auto;s
+	margin: 30px auto;
+	width: 80%;
 }

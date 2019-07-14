@@ -5,13 +5,10 @@ footer {
 	background: white;
 	height: 60px;
 	width: 100%;
+	position: absolute;
 }
 
 footer p {
-	bottom: 0;
-	right: 0;
-	left: 0;
-	position: absolute;
+	line-height: 30px;
 	text-align: center;
-	top: 10%;
 }
